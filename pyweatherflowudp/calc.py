@@ -295,6 +295,7 @@ def _battery_soc(
         if left.voltage <= battery_voltage <= right.voltage:
             # Linear interpolation
             pct_per_volt = (right.soc - left.soc) / (right.voltage - left.voltage)
-            return left.soc + pct_per_volt * (battery_voltage - left.voltage)
+            # The curve is only an estimate, so decimals would be false precision
+            return round(left.soc + pct_per_volt * (battery_voltage - left.voltage))
 
     raise RuntimeError("Failed to determine battery SOC")

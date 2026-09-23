@@ -64,7 +64,7 @@ def test_alkaline_battery_soc() -> None:
     # at minimum
     assert alkaline_battery_soc(1.1 * UNIT_VOLTS) == 0 * UNIT_PERCENT
     # interpolated
-    assert round(alkaline_battery_soc(1.35 * UNIT_VOLTS), 3) == 72.5 * UNIT_PERCENT
+    assert round(alkaline_battery_soc(1.355 * UNIT_VOLTS), 3) == 74 * UNIT_PERCENT
     # at maximum
     assert alkaline_battery_soc(1.59 * UNIT_VOLTS) == 100 * UNIT_PERCENT
     # above maximum
@@ -79,7 +79,7 @@ def test_lto_battery_soc() -> None:
     # at minimum
     assert lto_battery_soc(2 * UNIT_VOLTS) == 0 * UNIT_PERCENT
     # interpolated
-    assert round(lto_battery_soc(2.29 * UNIT_VOLTS), 3) == 62.5 * UNIT_PERCENT
+    assert round(lto_battery_soc(2.295 * UNIT_VOLTS), 3) == 64 * UNIT_PERCENT
     # at maximum
     assert lto_battery_soc(2.7 * UNIT_VOLTS) == 100 * UNIT_PERCENT
     # above maximum

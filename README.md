@@ -100,7 +100,7 @@ Base for sensors.
 | property          | type     | description                                           |
 | ----------------- | -------- | ----------------------------------------------------- |
 | battery           | Quantity | The current battery voltage.                          |
-| battery_percent\* | Quantity | The estimated battery level as a percentage.          |
+| battery_percent\* | Quantity | The estimated battery level as a whole percentage.    |
 | hub_rssi          | Quantity | The signal strength of the hub in decibels.           |
 | hub_sn            | str      | The serial number of the hub the sensor belongs to.   |
 | last_report       | datetime | The UTC timestamp from the last observation.          |

@@ -270,7 +270,7 @@ def test_tempest_device_low_voltage(
     assert device.wind_direction_average is None
     assert device.wind_sample_interval == 300 * UNIT_SECONDS
     assert device.battery == 2.358 * UNIT_VOLTS
-    assert round(device.battery_percent, 4) == 74.75 * UNIT_PERCENT
+    assert round(device.battery_percent, 4) == 75 * UNIT_PERCENT
     assert device.power_save_mode == PowerSaveMode.MODE_3
 
 
