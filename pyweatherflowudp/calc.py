@@ -270,20 +270,24 @@ def wind_chill(
     ).to(air_temperature.u)
 
 
-def alkaline_battery_soc(battery_voltage: Quantity[float]) -> Quantity[float]:
+def alkaline_battery_soc(battery_voltage: Quantity[float]) -> Quantity[int]:
     """Calculate the state of charge (SOC) for an alkaline battery voltage."""
     return _battery_soc(battery_voltage, ALKALINE_BATTERY_CURVE)
 
 
-def lto_battery_soc(battery_voltage: Quantity[float]) -> Quantity[float]:
+def lto_battery_soc(battery_voltage: Quantity[float]) -> Quantity[int]:
     """Calculate the state of charge (SOC) for a lithium titanate (LTO) battery voltage."""
     return _battery_soc(battery_voltage, LTO_BATTERY_CURVE)
 
 
 def _battery_soc(
     battery_voltage: Quantity[float], battery_curve: list[BatteryCurvePoint]
-) -> Quantity[float]:
-    """Calculate the state of charge (SOC) for a given voltage and curve."""
+) -> Quantity[int]:
+    """Calculate the state of charge (SOC) for a given voltage and curve.
+
+    The SOC is rounded to a whole percent, since the curve is only an estimate
+    and decimals would be false precision.
+    """
     if battery_voltage <= battery_curve[0].voltage:
         return battery_curve[0].soc
 
@@ -295,7 +299,7 @@ def _battery_soc(
         if left.voltage <= battery_voltage <= right.voltage:
             # Linear interpolation
             pct_per_volt = (right.soc - left.soc) / (right.voltage - left.voltage)
-            # The curve is only an estimate, so decimals would be false precision
-            return round(left.soc + pct_per_volt * (battery_voltage - left.voltage))
+            soc = left.soc + pct_per_volt * (battery_voltage - left.voltage)
+            return round(soc.m_as(UNIT_PERCENT)) * UNIT_PERCENT
 
     raise RuntimeError("Failed to determine battery SOC")
