@@ -100,7 +100,7 @@ def test_sky_device(obs_sky: dict[str, Any]) -> None:
 
     device.parse_message(obs_sky)
     assert device.battery == 3.12 * UNIT_VOLTS
-    assert round(device.battery_percent, 4) == 98 * UNIT_PERCENT
+    assert device.battery_percent == 98 * UNIT_PERCENT
     assert device.illuminance == 9000 * UNIT_LUX
     assert device.precipitation_type == PrecipitationType.NONE
     assert device.rain_accumulation_previous_minute == 0 * UNIT_MILLIMETERS
@@ -172,7 +172,7 @@ def test_tempest_device(
     device.parse_message(obs_st)
     assert device.air_temperature == 22.37 * UNIT_DEGREES_CELSIUS
     assert device.battery == 2.410 * UNIT_VOLTS
-    assert round(device.battery_percent, 3) == 81 * UNIT_PERCENT
+    assert device.battery_percent == 81 * UNIT_PERCENT
     assert device.illuminance == 328 * UNIT_LUX
     assert device.lightning_strike_average_distance == 0 * UNIT_KILOMETERS
     assert device.lightning_strike_count == 0
@@ -270,7 +270,7 @@ def test_tempest_device_low_voltage(
     assert device.wind_direction_average is None
     assert device.wind_sample_interval == 300 * UNIT_SECONDS
     assert device.battery == 2.358 * UNIT_VOLTS
-    assert round(device.battery_percent, 4) == 74.75 * UNIT_PERCENT
+    assert device.battery_percent == 75 * UNIT_PERCENT
     assert device.power_save_mode == PowerSaveMode.MODE_3
 
 

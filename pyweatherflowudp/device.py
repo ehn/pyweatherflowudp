@@ -295,7 +295,7 @@ class WeatherFlowSensorDevice(BaseSensorMixin, WeatherFlowDevice):
         )
 
     @property
-    def battery_percent(self) -> Quantity[float] | None:
+    def battery_percent(self) -> Quantity[int] | None:
         """Return the estimated battery level as a percentage, or None if unknown."""
         raise NotImplementedError
 
@@ -445,7 +445,7 @@ class AirDevice(AirSensorType):
     )
 
     @property
-    def battery_percent(self) -> Quantity[float] | None:
+    def battery_percent(self) -> Quantity[int] | None:
         """Return the estimated battery level (percentage), or None if unknown.
 
         The WeatherFlow Air has four batteries arranged as two parallel
@@ -481,7 +481,7 @@ class SkyDevice(SkySensorType):
     )
 
     @property
-    def battery_percent(self) -> Quantity[float] | None:
+    def battery_percent(self) -> Quantity[int] | None:
         """Return the estimated battery level (percentage), or None if unknown.
 
         The WeatherFlow SKY has eight batteries arranged as four parallel
@@ -536,7 +536,7 @@ class TempestDevice(AirSensorType, SkySensorType):
     # Derived metrics
 
     @property
-    def battery_percent(self) -> Quantity[float] | None:
+    def battery_percent(self) -> Quantity[int] | None:
         """Return the estimated battery level (percentage), or None if unknown."""
         if self.battery is None:
             return None
